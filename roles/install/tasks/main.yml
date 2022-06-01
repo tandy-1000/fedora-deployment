@@ -1,0 +1,21 @@
+- name: Setup tasks
+  tasks:
+    - include: nim.yml
+    - include: vscodium.yml
+
+- name: Install DNF packages
+  package:
+    name:
+      - thunderbird
+      - codium
+      - yt-dlp
+      - gimp
+      - lollypop
+      - vlc
+      - syncthing
+      - evolution-data-server
+      - wireguard-tools
+      - btrbk
+      - python3-dnf-plugin-snapper
+    state: present
+  become: yes

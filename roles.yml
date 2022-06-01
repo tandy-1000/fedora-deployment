@@ -2,5 +2,6 @@
   hosts: localhost
   roles:
     - dnf
+    - install
     - snapper
     - btrbk

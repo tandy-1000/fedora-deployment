@@ -1,0 +1,17 @@
+- name: Add VSCodium repo key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+  become: yes
+
+- name: Copy VSCodium repo file
+  copy:
+    src: "{{playbook_dir}}/roles/install/files/vscodium.repo"
+    dest: /etc/yum.repos.d/
+  become: yes
+
+- name: Set permissions for VSCodium repo file
+  ansible.builtin.file:
+    path: /etc/yum.repos.d/vscodium.repo
+    mode: '0640'
+  become: yes

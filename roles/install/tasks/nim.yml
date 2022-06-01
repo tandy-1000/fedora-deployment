@@ -1,0 +1,12 @@
+- name: Download choosenim
+  ansible.builtin.get_url:
+    url: https://nim-lang.org/choosenim/init.sh
+    dest: /tmp/choosenim.sh
+
+- name: Install choosenim
+  ansible.builtin.shell:
+    cmd: cat /tmp/choosenim.sh | sh
+
+- name: Setup Nim devel
+  ansible.builtin.shell:
+    cmd: choosenim devel
