@@ -1,0 +1,5 @@
+- name: Generate key pairs
+  delegate_to: server.local
+  ansible.builtin.shell:
+    {{playbook_dir}}/roles/wireguard/files/new-wireguard-peer.sh {{device}}
+  become: yes
