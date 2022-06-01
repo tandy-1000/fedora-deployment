@@ -8,10 +8,5 @@
   copy:
     src: "{{playbook_dir}}/roles/install/files/vscodium.repo"
     dest: /etc/yum.repos.d/
-  become: yes
-
-- name: Set permissions for VSCodium repo file
-  ansible.builtin.file:
-    path: /etc/yum.repos.d/vscodium.repo
     mode: '0640'
   become: yes
