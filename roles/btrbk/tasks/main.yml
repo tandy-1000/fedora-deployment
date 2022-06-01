@@ -1,0 +1,32 @@
+- name: Install btrbk
+  package:
+    name:
+      - btrbk
+    state: present
+  become: yes
+
+- name: Setup btrbk SSH key
+  community.crypto.openssh_keypair:
+    path: /etc/btrbk/ssh/id_rsa
+    size: 4096
+    comment: "btrbk@local"
+
+- name: Copy btrbk SSH key
+  delegate_to: server.local
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '/etc/btrbk/ssh/id_rsa.pub') }}"
+  become: yes
+
+- name: Copy config file
+  copy:
+    src: "{{playbook_dir}}/roles/btrbk/files/btrbk.conf"
+    dest: /etc/btrbk
+  become: yes
+
+- name: Set permissions
+  ansible.builtin.file:
+    path: /etc/btrbk/btrbk.conf
+    mode: '0640'
+  become: yes

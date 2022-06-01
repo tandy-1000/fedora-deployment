@@ -1,0 +1,31 @@
+- name: Install snapper
+  package:
+    name:
+      - python3-dnf-plugin-snapper
+    state: present
+  become: yes
+
+- name: Copy config file
+  copy:
+    src: "{{playbook_dir}}/roles/snapper/files/root"
+    dest: /etc/snapper/configs/
+  become: yes
+
+- name: Set permissions
+  ansible.builtin.file:
+    path: /etc/snapper/configs/root
+    mode: '0640'
+  become: yes
+
+- name: Enable cleanup
+  ansible.builtin.systemd:
+    enabled: yes
+    name: snapper-cleanup.timer
+  become: yes
+
+- name: Enable user access
+  ansible.builtin.file:
+    path: /.snapshots
+    mode: 'a+rx'
+    group: 'tandy'
+  become: yes
