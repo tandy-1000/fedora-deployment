@@ -16,10 +16,5 @@
   copy:
     src: "{{playbook_dir}}/roles/btrbk/files/btrbk.conf"
     dest: /etc/btrbk
-  become: yes
-
-- name: Set permissions
-  ansible.builtin.file:
-    path: /etc/btrbk/btrbk.conf
     mode: '0640'
   become: yes
