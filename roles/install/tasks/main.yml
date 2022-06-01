@@ -1,7 +1,8 @@
-- name: Setup tasks
-  tasks:
-    - include: nim.yml
-    - include: vscodium.yml
+- include_tasks: nim.yml
+
+- include_tasks: flatpak.yml
+
+- include_tasks: vscodium.yml
 
 - name: Install DNF packages
   package:
