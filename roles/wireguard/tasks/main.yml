@@ -1,5 +1,25 @@
-- name: Generate key pairs
+- name: Generate peer config
+  script:
+    "{{playbook_dir}}/roles/wireguard/files/new-wireguard-peer.sh /etc/wireguard/clients/{{device}}.conf"
+  become: yes
   delegate_to: server.local
-  ansible.builtin.shell:
-    "{{playbook_dir}}/roles/wireguard/files/new-wireguard-peer.sh {{device}}"
+
+- name: Get config
+  fetch:
+    src: "/etc/wireguard/clients/{{device}}.conf"
+    dest: "/tmp/"
+    flat: yes
+  become: yes
+  delegate_to: server.local
+
+- name: Move to /etc/wireguard
+  copy:
+    src: "/tmp/{{device}}.conf"
+    dest: "/etc/wireguard/{{device}}.conf"
+  become: yes
+
+- name: Enable config
+  systemd:
+    enabled: yes
+    name: wg-quick@{{device}}.service
   become: yes
