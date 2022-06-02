@@ -5,19 +5,19 @@
   become: yes
 
 - name: Set permissions
-  ansible.builtin.file:
+  file:
     path: /etc/snapper/configs/root
     mode: '0640'
   become: yes
 
 - name: Enable cleanup
-  ansible.builtin.systemd:
+  systemd:
     enabled: yes
     name: snapper-cleanup.timer
   become: yes
 
 - name: Enable user access
-  ansible.builtin.file:
+  file:
     path: /.snapshots
     mode: 'a+rx'
     group: 'tandy'

@@ -1,5 +1,5 @@
 - name: Add VSCodium repo key
-  ansible.builtin.rpm_key:
+  rpm_key:
     state: present
     key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
   become: yes
