@@ -18,7 +18,7 @@ readonly PEER_ADDRESS=$(wg show ${INTERFACE} allowed-ips | cut -f 2 | awk -F'[./
 wg set ${INTERFACE} peer ${PUBLIC_KEY} preshared-key <(echo ${PRESHARED_KEY}) allowed-ips ${PEER_ADDRESS}
 
 # Store peer config
-cat << END_OF_CONFIG | tee /etc/wireguard/clients/$0.conf
+cat << EOF >> $1
 [Interface]
 Address = ${PEER_ADDRESS}
 PrivateKey = ${PRIVATE_KEY}
@@ -28,4 +28,4 @@ PublicKey = ${SERVER_PUBLIC_KEY}
 PresharedKey = ${PRESHARED_KEY}
 AllowedIPs = 10.0.0.0/24
 Endpoint = tandyserver.duckdns.org:57576
-END_OF_CONFIG
+EOF
