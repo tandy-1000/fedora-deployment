@@ -30,5 +30,6 @@
       - wireguard-tools
       - btrbk
       - python3-dnf-plugin-snapper
+      - borgbackup
     state: present
   become: yes
