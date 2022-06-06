@@ -1,0 +1,10 @@
+- name: Download Chezmoi
+  get_url:
+    url: https://chezmoi.io/get
+    dest: /tmp/chezmoi.sh
+    mode: +x
+
+- name: Setup Chezmoi
+  shell:
+    chdir: ~/.local/
+    cmd: /tmp/chezmoi.sh -- init --apply tandy-1000
