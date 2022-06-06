@@ -1,13 +1,27 @@
-- name: Setup SSH key for server
+- name: Setup tandy SSH key for server
   community.crypto.openssh_keypair:
-    path: ~/.ssh/id_rsa
+    path: ~/.ssh/tandy_id_rsa
     size: 4096
-    comment: "tandy@local"
+    comment: "tandy@server.local"
 
-- name: Copy SSH key
+- name: Copy tandy SSH key
   delegate_to: server.local
   ansible.posix.authorized_key:
     user: tandy
     state: present
-    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', '~/.ssh/tandy_id_rsa.pub') }}"
+  become: yes
+
+- name: Setup borg SSH key for server
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/borg_id_rsa
+    size: 4096
+    comment: "borg@server.local"
+
+- name: Copy borg SSH key
+  delegate_to: server.local
+  ansible.posix.authorized_key:
+    user: borg
+    state: present
+    key: "{{ lookup('file', '~/.ssh/borg_id_rsa.pub') }}"
   become: yes
