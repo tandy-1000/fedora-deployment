@@ -31,5 +31,6 @@
       - btrbk
       - python3-dnf-plugin-snapper
       - borgbackup
+      - lm_sensors
     state: present
   become: yes
