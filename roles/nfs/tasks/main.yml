@@ -1,0 +1,16 @@
+- name: Create mount point
+  file:
+    path: /mnt/bigdrive
+    state: directory
+    owner: tandy
+    mode: +rw
+  become: yes
+
+- name: Mount NFS volume
+  ansible.posix.mount:
+    path: /mnt/bigdrive
+    src: 10.0.0.1:/bigdrive
+    fstype: nfs
+    opts: noauto,x-systemd.automount,x-systemd.mount-timeout=30,x-systemd.idle-timeout=1min,_netdev
+    state: present
+  become: yes
