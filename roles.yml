@@ -4,6 +4,7 @@
     - dnf
     - install
     - snapper
+    - ssh
     - wireguard
     - nfs
     - chezmoi
