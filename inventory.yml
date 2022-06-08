@@ -1,8 +1,9 @@
-
 all:
   hosts:
     localhost:
       ansible_connection: local
+      ansible_user: tandy
+      ansible_become_user: root
       ansible_become_pass: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           30656566396538353764653466386233643533623338393265646433643061373465356365373639
