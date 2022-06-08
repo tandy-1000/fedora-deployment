@@ -5,8 +5,9 @@
 
 - name: Install theme
   shell:
-    cmd: ./install.sh -c dark -i fedora --silent-mode
+    cmd: ./install.sh -c Dark -i fedora --silent-mode
     chdir: /tmp/WhiteSur
+  become: yes
 
 - name: Install tweaks
   shell:
