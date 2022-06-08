@@ -1,9 +1,3 @@
-- include_tasks: nim.yml
-
-- include_tasks: flatpak.yml
-
-- include_tasks: vscodium.yml
-
 - name: Add RPM Fusion repo key
   rpm_key:
     state: present
@@ -15,6 +9,8 @@
     name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
     state: present
   become: yes
+
+- include_tasks: vscodium.yml
 
 - name: Install DNF packages
   package:
@@ -34,3 +30,7 @@
       - lm_sensors
     state: present
   become: yes
+
+- include_tasks: nim.yml
+
+- include_tasks: flatpak.yml
