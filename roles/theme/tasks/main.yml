@@ -11,7 +11,7 @@
 
 - name: Install tweaks
   shell:
-    cmd: ./tweaks.sh -F -g --silent-mode
+    cmd: ./tweaks.sh --flatpak --gdm --silent-mode
     chdir: /tmp/WhiteSur
   become: yes
 
