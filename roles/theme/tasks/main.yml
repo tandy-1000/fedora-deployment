@@ -1,0 +1,25 @@
+- name: Clone WhiteSur theme
+  git:
+    repo: https://github.com/vinceliuice/WhiteSur-gtk-theme
+    dest: /tmp/WhiteSur
+
+- name: Install theme
+  shell:
+    cmd: ./install.sh -c dark -i fedora --silent-mode
+    chdir: /tmp/WhiteSur
+
+- name: Install tweaks
+  shell:
+    cmd: ./tweaks.sh -F -g --silent-mode
+    chdir: /tmp/WhiteSur
+  become: yes
+
+- name: Clone WhiteSur icons
+  git:
+    repo: https://github.com/vinceliuice/WhiteSur-icon-theme
+    dest: /tmp/WhiteSurIcons
+
+- name: Install icons
+  shell:
+    cmd: ./install.sh
+    chdir: /tmp/WhiteSurIcons

@@ -8,5 +8,6 @@
     - ssh
     - wireguard
     - nfs
+    - theme
     - chezmoi
     - btrbk
