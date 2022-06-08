@@ -14,5 +14,6 @@ Currently takes care of:
 - [x] Setting up SSH keys for home server
 - [x] Setting up a WireGuard configuration
 - [x] Setting up NFS mounts
+- [x] Setup Gnome themes
 - [x] Loading dotfiles with Chezmoi
 - [x] Btrbk configuration
