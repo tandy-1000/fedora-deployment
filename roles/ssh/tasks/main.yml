@@ -1,20 +1,20 @@
-- name: Setup tandy SSH key for server
+- name: "Setup {{ ansible_user }} SSH key for server"
   community.crypto.openssh_keypair:
-    path: ~/.ssh/tandy_id_rsa
+    path: "/home/{{ ansible_user }}/.ssh/{{ ansible_user }}_id_rsa"
     size: 4096
-    comment: "tandy@server.local"
+    comment: "{{ ansible_user }}@server.local"
 
-- name: Copy tandy SSH key
+- name: "Copy {{ ansible_user }} SSH key"
   delegate_to: server.local
   ansible.posix.authorized_key:
-    user: tandy
+    user: "{{ ansible_user }}"
     state: present
-    key: "{{ lookup('file', '~/.ssh/tandy_id_rsa.pub') }}"
+    key: "{{ lookup('file', '/home/{{ ansible_user }}/.ssh/{{ ansible_user }}_id_rsa.pub') }}"
   become: yes
 
 - name: Setup borg SSH key for server
   community.crypto.openssh_keypair:
-    path: ~/.ssh/borg_id_rsa
+    path: "/home/{{ ansible_user }}/.ssh/borg_id_rsa"
     size: 4096
     comment: "borg@server.local"
 
@@ -23,5 +23,5 @@
   ansible.posix.authorized_key:
     user: borg
     state: present
-    key: "{{ lookup('file', '~/.ssh/borg_id_rsa.pub') }}"
+    key: "{{ lookup('file', '/home/{{ ansible_user }}/.ssh/borg_id_rsa.pub') }}"
   become: yes

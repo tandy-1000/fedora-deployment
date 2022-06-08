@@ -2,7 +2,7 @@
   file:
     path: /mnt/bigdrive
     state: directory
-    owner: tandy
+    owner: "{{ ansible_user }}"
     mode: +rw
   become: yes
 

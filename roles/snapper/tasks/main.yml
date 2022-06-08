@@ -1,6 +1,6 @@
 - name: Copy config file
   copy:
-    src: "{{playbook_dir}}/roles/snapper/files/root"
+    src: "{{ playbook_dir }}/roles/snapper/files/root"
     dest: /etc/snapper/configs/
   become: yes
 
@@ -19,6 +19,7 @@
 - name: Enable user access
   file:
     path: /.snapshots
+    state: directory
     mode: 'a+rx'
-    group: 'tandy'
+    group: "{{ ansible_user }}"
   become: yes

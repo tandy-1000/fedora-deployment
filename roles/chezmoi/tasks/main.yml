@@ -6,5 +6,5 @@
 
 - name: Setup Chezmoi
   shell:
-    chdir: ~/.local/
+    chdir: "/home/{{ ansible_user }}/.local/"
     cmd: /tmp/chezmoi.sh -- init --apply tandy-1000
