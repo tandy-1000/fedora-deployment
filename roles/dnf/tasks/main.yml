@@ -1,6 +1,6 @@
 - name: Copy config file
   copy:
-    src: "{{playbook_dir}}/roles/dnf/files/dnf.conf"
+    src: "{{ playbook_dir }}/roles/dnf/files/dnf.conf"
     dest: /etc/dnf
     mode: '0640'
   become: yes

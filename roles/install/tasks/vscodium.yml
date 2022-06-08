@@ -6,7 +6,7 @@
 
 - name: Copy VSCodium repo file
   copy:
-    src: "{{playbook_dir}}/roles/install/files/vscodium.repo"
+    src: "{{ playbook_dir }}/roles/install/files/vscodium.repo"
     dest: /etc/yum.repos.d/
     mode: '0640'
   become: yes

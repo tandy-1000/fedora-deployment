@@ -21,7 +21,7 @@
 
 - name: Copy config file
   copy:
-    src: "{{playbook_dir}}/roles/btrbk/files/btrbk.conf"
+    src: "{{ playbook_dir }}/roles/btrbk/files/btrbk.conf"
     dest: /etc/btrbk
     mode: '0640'
   become: yes

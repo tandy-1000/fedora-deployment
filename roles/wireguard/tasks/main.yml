@@ -1,12 +1,12 @@
 - name: Generate peer config
   script:
-    "{{playbook_dir}}/roles/wireguard/files/new-wireguard-peer.sh /etc/wireguard/clients/{{device}}.conf"
+    "{{ playbook_dir }}/roles/wireguard/files/new-wireguard-peer.sh /etc/wireguard/clients/{{ device }}.conf"
   become: yes
   delegate_to: server.local
 
 - name: Get config
   fetch:
-    src: "/etc/wireguard/clients/{{device}}.conf"
+    src: "/etc/wireguard/clients/{{ device }}.conf"
     dest: "/tmp/"
     flat: yes
   become: yes
@@ -14,11 +14,11 @@
 
 - name: Move to /etc/wireguard
   copy:
-    src: "/tmp/{{device}}.conf"
-    dest: "/etc/wireguard/{{device}}.conf"
+    src: "/tmp/{{ device }}.conf"
+    dest: "/etc/wireguard/{{ device }}.conf"
   become: yes
 
 - name: Enable config
   shell:
-    nmcli connection import type wireguard file "/etc/wireguard/{{device}}.conf"
+    nmcli connection import type wireguard file "/etc/wireguard/{{ device }}.conf"
   become: yes
