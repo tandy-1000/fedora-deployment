@@ -1,17 +1,20 @@
 - name: Clone gitnim
   git:
     repo: https://github.com/nim-works/gitnim/
-    dest: ~/.gitnim
+    dest: "/home/{{ ansible_user }}/.gitnim"
 
-- name: Add gitnim to $PATH
+- name: Add gitnim to PATH
   shell:
-    echo "PATH=/home/tandy/.gitnim/bin:$PATH" >> ~/.bash_profile
+    echo 'export PATH=/home/{{ ansible_user }}/.gitnim/bin:$PATH' >> /home/{{ ansible_user }}/.bash_profile
+
+- name: Update PATH
+  shell:
+    source "/home/{{ ansible_user }}/.bash_profile"
 
 - name: Build gitnim
-  shell:
-    command: nim c gitnim/gitnim.nim
-    chdir: ~/.gitnim
+  command:
+    cmd: nim c gitnim/gitnim.nim
+    chdir: "/home/{{ ansible_user }}/.gitnim"
 
 - name: Setup Nim devel
-  shell:
-    git nim devel
+  raw: git nim -q devel
