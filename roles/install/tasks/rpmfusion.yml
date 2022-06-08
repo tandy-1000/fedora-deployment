@@ -1,0 +1,11 @@
+- name: Add RPM Fusion repo key
+  rpm_key:
+    state: present
+    key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+  become: yes
+
+- name: Enable the RPM Fusion repo
+  package:
+    name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
+    state: present
+  become: yes
