@@ -4,6 +4,7 @@
     - dnf
     - install
     - snapper
+    - hosts
     - ssh
     - wireguard
     - nfs

@@ -1,0 +1,4 @@
+- name: Add useful hosts
+  shell:
+    echo '10.0.0.1 server.local server.home.arpa' >> /etc/hosts
+  become: yes
