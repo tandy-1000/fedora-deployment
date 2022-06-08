@@ -22,9 +22,3 @@
   shell:
     nmcli connection import type wireguard file "/etc/wireguard/{{device}}.conf"
   become: yes
-
-# - name: Enable config
-#   systemd:
-#     enabled: yes
-#     name: wg-quick@{{device}}.service
-#   become: yes
