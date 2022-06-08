@@ -18,7 +18,7 @@
     dest: "/etc/wireguard/{{device}}.conf"
   become: yes
 
-- name: Enable config:
+- name: Enable config
   shell:
     nmcli connection import type wireguard file "/etc/wireguard/{{device}}.conf"
   become: yes
