@@ -1,13 +1,17 @@
-- name: Download choosenim
-  get_url:
-    url: https://nim-lang.org/choosenim/init.sh
-    dest: /tmp/choosenim.sh
-    mode: +x
+- name: Clone gitnim
+  git:
+    repo: https://github.com/nim-works/gitnim/
+    dest: ~/.gitnim
 
-- name: Install choosenim
+- name: Add gitnim to $PATH
   shell:
-    /tmp/choosenim.sh -y
+    echo "PATH=/home/tandy/.gitnim/bin:$PATH" >> ~/.bash_profile
+
+- name: Build gitnim
+  shell:
+    command: nim c gitnim/gitnim.nim
+    chdir: ~/.gitnim
 
 - name: Setup Nim devel
   shell:
-    choosenim devel
+    git nim devel
