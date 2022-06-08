@@ -1,8 +1,15 @@
+- name: Create btrbk SSH folder
+  file:
+    path: /etc/btrbk/ssh
+    state: directory
+  become: yes
+
 - name: Setup btrbk SSH key
   community.crypto.openssh_keypair:
     path: /etc/btrbk/ssh/id_rsa
     size: 4096
     comment: "btrbk@server.local"
+  become: yes
 
 - name: Copy btrbk SSH key
   delegate_to: server.local
