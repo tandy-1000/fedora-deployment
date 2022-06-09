@@ -10,6 +10,6 @@
 
 - name: Install Setzer
   shell:
-    cmd: ninja install -C builddir
+    cmd: ninja install -C builddir --prefix=/usr
     chdir: /tmp/Setzer
   become: yes
