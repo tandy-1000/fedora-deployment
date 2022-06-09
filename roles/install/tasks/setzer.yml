@@ -1,0 +1,15 @@
+- name: Clone Setzer repo
+  git:
+    repo: https://github.com/cvfosammmm/Setzer
+    dest: /tmp/Setzer
+
+- name: Build Setzer
+  shell:
+    cmd: meson builddir
+    chdir: /tmp/Setzer
+
+- name: Install Setzer
+  shell:
+    cmd: ninja install -C builddir
+    chdir: /tmp/Setzer
+  become: yes
