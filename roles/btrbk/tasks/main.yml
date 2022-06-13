@@ -25,3 +25,18 @@
     dest: /etc/btrbk
     mode: '0640'
   become: yes
+
+- name: Create /btrfs_pool
+  file:
+    path: /btrfs_pool
+    state: directory
+  become: yes
+
+- name: Mount /btrfs_pool
+  ansible.posix.mount:
+    path: /btrfs_pool
+    src: "UUID={{ ansible_facts['device_links']['uuids']['dm-0'][0] }}"
+    fstype: btrfs
+    opts: subvolid=5,compress=zstd:1,x-systemd.device-timeout=0
+    state: mounted
+  become: yes
