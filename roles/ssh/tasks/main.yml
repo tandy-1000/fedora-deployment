@@ -1,27 +1,31 @@
 - name: "Setup {{ ansible_user }} SSH key for server"
   community.crypto.openssh_keypair:
-    path: "/home/{{ ansible_user }}/.ssh/{{ ansible_user }}_id_rsa"
+    path: "/home/{{ ansible_user }}/.ssh/{{ ansible_user }}_id_ed25519"
     size: 4096
-    comment: "{{ ansible_user }}@server.local"
+    type: ed25519
+    comment: "{{ ansible_user }}@server.local for {{ device }}"
 
 - name: "Copy {{ ansible_user }} SSH key"
   delegate_to: server.local
   ansible.posix.authorized_key:
     user: "{{ ansible_user }}"
     state: present
-    key: "{{ lookup('file', '/home/{{ ansible_user }}/.ssh/{{ ansible_user }}_id_rsa.pub') }}"
+    key: "{{ lookup('file', '/home/{{ ansible_user }}/.ssh/{{ ansible_user }}_id_ed25519.pub') }}"
   become: yes
 
-- name: Setup borg SSH key for server
-  community.crypto.openssh_keypair:
-    path: "/home/{{ ansible_user }}/.ssh/borg_id_rsa"
-    size: 4096
-    comment: "borg@server.local"
+# - name: "Setup server initramfs unlock SSH key"
+#   community.crypto.openssh_keypair:
+#     path: "/home/{{ ansible_user }}/.ssh/server_id_ed25519"
+#     size: 4096
+#     type: ed25519
+#     comment: "Unlock server.local for {{ device }}"
+#   become: yes
 
-- name: Copy borg SSH key
-  delegate_to: server.local
-  ansible.posix.authorized_key:
-    user: borg
-    state: present
-    key: "{{ lookup('file', '/home/{{ ansible_user }}/.ssh/borg_id_rsa.pub') }}"
-  become: yes
+# - name: "Copy server initramfs unlock SSH key"
+#   delegate_to: server.local
+#   ansible.posix.authorized_key:
+#     state: present
+#     user: root
+#     path: /etc/dropbear/initramfs/authorized_keys
+#     key: "{{ lookup('file', '/home/{{ ansible_user }}/.ssh/server_id_ed25519.pub') }}"
+#   become: yes
