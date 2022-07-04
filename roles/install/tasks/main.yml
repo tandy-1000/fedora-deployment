@@ -20,6 +20,15 @@
       - lm_sensors
       - gnome-extensions-app
       - gnome-shell-extension-pop-shell
+      - setzer
+      - texlive-scheme-minimal
+      - texlive-outlines
+      - texlive-parskip
+      - texlive-inter
+      - texlive-fontaxes
+      - latexmk
+      - smartmontools
+
     state: present
   become: yes
 
