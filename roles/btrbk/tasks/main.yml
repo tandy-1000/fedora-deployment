@@ -6,8 +6,9 @@
 
 - name: Setup btrbk SSH key
   community.crypto.openssh_keypair:
-    path: /etc/btrbk/ssh/id_rsa
+    path: /etc/btrbk/ssh/id_ed25519
     size: 4096
+    type: ed25519
     comment: "btrbk@server.local"
   become: yes
 
@@ -16,7 +17,7 @@
   ansible.posix.authorized_key:
     user: root
     state: present
-    key: "{{ lookup('file', '/etc/btrbk/ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', '/etc/btrbk/ssh/id_ed25519.pub') }}"
   become: yes
 
 - name: Copy config file
